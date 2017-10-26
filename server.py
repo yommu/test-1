@@ -31,11 +31,11 @@ class LockWaiter:
         if self.number_of_tryes == 0:
             return False
         else:
-            lock_file_path = file_path + ".lock"
+            lock_file_path = self.get_file_lock_name(file_path)
 
             if os.path.isfile(lock_file_path):
-
                 lock_removed = self.delete_file_if_older(lock_file_path, 60)
+
                 if lock_removed is True:
                     return self.file_available(file_path)
 
@@ -68,7 +68,7 @@ def recive():
     hash_string    = hashlib.sha1(data).hexdigest()
     file_path      = os.path.join(data_path, hash_string)
     lock_file_path = file_path + ".lock"
-    locker   = LockWaiter(2)
+    locker         = LockWaiter(3)
 
     if locker.file_available(file_path) is not True:
         return json.jsonify(error=400, text='File is locked, try again later'), 400
