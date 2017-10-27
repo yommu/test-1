@@ -21,10 +21,16 @@ class DataSender:
 
     def send(self):
         server = self.servers.pop(0)
-        r = requests.post(server, self.data)
-        if r.status_code == 200:
-            self.success(server)
-        else:
+
+        print "%s :Starting" % server
+
+        try:
+            r = requests.post(server, self.data)
+            if r.status_code == 200:
+                self.success(server)
+            else:
+                self.fail(server)
+        except (requests.ConnectionError) as e:
             self.fail(server)
 
     def success(self, server):
