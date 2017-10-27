@@ -75,8 +75,11 @@ def recive():
     locker.lock(file_path)
 
     if os.path.isfile(file_path) is not True:
-        with open(file_path, "w", 0) as new_file:
-            new_file.write(data)
+        try:
+            with open(file_path, "w", 0) as new_file:
+                new_file.write(data)
+        except (OSError, IOError) as e:
+            return json.jsonify(error=500, text=str(e)), 500
 
     locker.unlock(file_path)
 
@@ -91,8 +94,11 @@ def send(sha1):
         return get_locked_file_response()
 
     if os.path.isfile(file_path):
-        with open(file_path, "r") as hash_file:
-            return make_response(hash_file.read())
+        try:
+            with open(file_path, "r") as hash_file:
+                return make_response(hash_file.read())
+        except (OSError, IOError) as e:
+            return json.jsonify(error=500, text=str(e)), 500
 
     return json.jsonify(error=404, text='File does not exists'), 404
 
