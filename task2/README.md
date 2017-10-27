@@ -43,3 +43,26 @@ http://127.0.0.1:8883
 ```
 python client.py
 ```
+
+Output example:
+
+```
+http://127.0.0.1:8881 :Starting
+http://127.0.0.1:8882 :Starting
+http://127.0.0.1:8881 :Fail
+http://127.0.0.1:8883 :Starting
+http://127.0.0.1:8882 :Fail
+http://127.0.0.1:8881 :Starting
+http://127.0.0.1:8883 :Fail
+http://127.0.0.1:8882 :Starting
+http://127.0.0.1:8882 :Fail
+http://127.0.0.1:8883 :Starting
+http://127.0.0.1:8881 :Success
+http://127.0.0.1:8883 :Fail
+http://127.0.0.1:8882 :Starting
+http://127.0.0.1:8882 :Fail
+http://127.0.0.1:8883 :Starting
+http://127.0.0.1:8883 :Fail
+http://127.0.0.1:8882 :Starting
+http://127.0.0.1:8882 :Success
+```
